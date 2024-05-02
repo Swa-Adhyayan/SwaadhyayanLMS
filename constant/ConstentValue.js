@@ -15,6 +15,10 @@ export const apiRoot = Object.freeze({
     getModuleActivityData:"getModuleActivityData",
     getLearningRightToolsList:"getLearningRightToolsList",
     getFilePathAccToLearningType:"getFilePathAccToLearningType",
+    septModules:"septModules",
+    septQuestions:"septQuestions",
+    septAttempt:"septAttempt",
+    reportSEPT:"reportSEPT"
 
 
 });

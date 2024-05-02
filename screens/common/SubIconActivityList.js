@@ -3,43 +3,59 @@ import React, { useContext } from 'react'
 import { SWATheam } from '../../constant/ConstentValue'
 import { GlobleData } from '../../Store'
 
-const SubIconActivityList = ({ navigation, toolItems, getModuleActivityData, selectedModuleItem}) => {
-    console.log(toolItems, 'if funData')
-
+const SubIconActivityList = ({navigation, toolItems, getModuleActivityData, selectedModuleItem}) => {
+   let listData = []
+if(toolItems.mainData!=undefined){
+    listData = toolItems.mainData
+}else{
+    listData = toolItems
+}
 
     const { userData } = useContext(GlobleData)
     return (
         <View style={{ flex: 1, backgroundColor: userData.data.colors.liteTheme }}>
             <ScrollView>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', marginVertical: 10, paddingHorizontal: 10 }}>
-                {toolItems?.mainData.map((item, index) => {
+                {listData.map((item, index) => {
                 let listKey = ''
-                let baseUrl = ''
-                let iconUrl = ''
                 let iconName = ""
                 let chapActUrl = ""
+                let imgUrl = ''
                 if(selectedModuleItem?.urlLink!=null && selectedModuleItem?.urlLink!=""){
-                    if(item.chapterName!=null ||item.chapterName!=undefined){
+                    if(item.chapterName!= null ||item.chapterName != undefined){
                         listKey = item.chapterID
-                        iconUrl = item.chapterName.chapterIcon
-                        baseUrl = toolItems.chapterImg
+                        {/* iconUrl = item.chapterName.chapterIcon
+                        baseUrl = toolItems.chapterImg */}
+                        imgUrl = toolItems.chapterImg+item.chapterName.chapterIcon
                         iconName = ''
                         
                     }else{
+                        {/* alert(index) */}
                         listKey = item.subTypeID
-                        iconUrl = index+1+'.png'
-                        baseUrl = toolItems.activityImg
-                        iconName = item.activityName
+                        {/* iconUrl = index+1+'.png'
+                        baseUrl = toolItems.activityImg */}
+                        imgUrl = toolItems.activityImg+(index+1)+'.png'
+                        {/* imgUrl = toolItems.activityImg+(index+1)+'.png' */}
+                        iconName = item.activityName.replace('<br>','')
                     }
                 }else{
-                    listKey = item.chapterID
-                    iconUrl = item?.chapterIcon
-                    baseUrl = toolItems.chapterImg
-                    iconName = ''
+                    if(item.htmlUrl=="swaLearning"){
+                        listKey = item.activityID
+                        {/* iconUrl = item.activityUrl
+                        baseUrl = '' */}
+                        imgUrl = item.imgPath
+                        iconName = item.activityName.replace('<br>','')
+
+                    }else{
+                        listKey = item.chapterID
+                        {/* iconUrl = item?.chapterIcon
+                        baseUrl = toolItems.chapterImg */}
+                        imgUrl = toolItems.chapterImg+item?.chapterIcon
+                        iconName = ''
+                    }
                 }
-                if(selectedModuleItem?.urlLink!=null||item.chapterName!=null){ 
-                    
-                        chapActUrl = `https://swaadhyayan.com/data/e-Learning/activities/${item.activityUrl}/Unit-${item.chapterNo}.pdf`;
+                if(selectedModuleItem?.urlLink!=null && item.chapterName!=null){ 
+                    chapActUrl = `https://swaadhyayan.com/data/e-Learning/activities/${item.activityUrl}/Unit-${item.chapterNo}.pdf`;
                 }
                         return (
                             <TouchableOpacity style={{ height: 160, marginVertical: 10, width: "40%", justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', elevation: 9, borderRadius: 6, justifyContent: 'space-around', padding: 8 }} key={index}
@@ -48,7 +64,10 @@ const SubIconActivityList = ({ navigation, toolItems, getModuleActivityData, sel
                                     if((toolItems.activityUrl!=null || toolItems.activityUrl!=undefined) && item.htmlUrl == "VirtualTour"){
                                         actUrl=item.activityPath
                                     }else if(toolItems.activityUrl!=null || toolItems.activityUrl!=undefined){
-                                        actUrl = toolItems.activityUrl
+                                        // actUrl = toolItems.activityUrl // for other
+                                        actUrl = item.activityPath
+                                    }else if(item.htmlUrl=="swaLearning"){
+                                        actUrl = item.activityUrl
                                     }
                                     // if(item.htmlUrl=="VirtualTour"){
                                     //     actUrl=item.activityPath
@@ -56,7 +75,7 @@ const SubIconActivityList = ({ navigation, toolItems, getModuleActivityData, sel
                                     getModuleActivityData(item, actUrl, chapActUrl, selectedModuleItem.subTypeID, navigation)
                                     }}>
                                 <View style={{ height: item.subTypeID != undefined ? 80 : 144, width: item.subTypeID != undefined ? 80 : 90, justifyContent: 'center', alignItems: 'center', }}>
-                                    <Image source={{ uri: baseUrl + iconUrl}} style={{ height: "100%", width: "100%", borderWidth: 1, resizeMode: "contain" }} />
+                                    <Image source={{ uri: imgUrl}} style={{ height: "100%", width: "100%", borderWidth: 1, resizeMode: "contain" }} />
                                 </View>
                                 {iconName!=''&&
                                     <View style={{ height: 40, alignItems: 'center' }}>

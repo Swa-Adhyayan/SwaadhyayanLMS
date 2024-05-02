@@ -7,10 +7,14 @@ import Services from '../../Services'
 import { SWATheam, apiRoot } from '../../constant/ConstentValue'
 import { GlobleData } from '../../Store'
 import IconsContainer from '../common/IconsContainer'
+import Loader from '../common/Loader'
+
+const activeMainIconIds = [4,17,28,36,27]
 
 const Dashboard = ({ navigation, route }) => {
   const { userData } = useContext(GlobleData)
-    const [deshboardData, setDeshboardData] = useState({ icons: null, timeTable: null, iconUrl: '', status:true })
+
+  const [deshboardData, setDeshboardData] = useState({ icons: null, timeTable: null, iconUrl: '', status:true })
   const [timeTableStructure, setTimeTableStructure] = useState();
   const weekDays = [
     'Sunday',
@@ -144,8 +148,11 @@ const Dashboard = ({ navigation, route }) => {
     setIsInstruction(true)
   }
   function getIconDetail(item){
-    // console.log(item, 'mainIcon')
-    navigation.navigate("subIconScreen", item)
+    if(activeMainIconIds.includes(item.getMainIconsData.mainIconID)){
+      navigation.navigate("subIconScreen", item)
+    }else{
+      alert('coming soon!')
+    }
   }
   
 
@@ -153,14 +160,14 @@ const Dashboard = ({ navigation, route }) => {
   return (
     <>
     {deshboardData.status?
-    <Text>Loadding.........</Text>:
+    <Loader/>:
     <View style={{ flex: 1, marginTop: 20, backgroundColor: userData?.data?.colors.liteTheme }}>
-      <SwaHeader title={'Dashboard'} leftIcon={"bars"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon} />
+      <SwaHeader title={'Swa-Adhyayan LMS'} leftIcon={"bars"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon} />
       <IconsContainer deshboardData={deshboardData} getIconDetail = {getIconDetail} type={"mainIcon"}/>
       <View style={{ paddingHorizontal: 10, marginTop: 20 }}>
         <View style={{}}>
           <View style={{ backgroundColor: userData?.data?.colors?.mainTheme, padding: 8, borderRightWidth:1, borderLeftWidth:1, borderColor: userData?.data?.colors.hoverTheme }}>
-            <Text style={{ textAlign: 'center', color: 'white', fontWeight:'bold', textTransform:'uppercase'}}> {dayname} Time Table</Text>
+            <Text style={{ textAlign: 'center', color: SWATheam.SwaWhite, fontWeight:'bold', textTransform:'uppercase'}}> {dayname} Time Table</Text>
           </View>
             <ScrollView horizontal>
           <View style={{ flexDirection: 'row'}}>
@@ -178,7 +185,7 @@ const Dashboard = ({ navigation, route }) => {
                     {item.head == "Prayer" || item.head == "Recess" || item.head == "Break" ?
                       <>
                         <View style={{ width: 40, paddingVertical:5, backgroundColor: userData?.data?.colors?.mainTheme, borderWidth: 1, borderColor: userData?.data?.colors.hoverTheme}}>
-                          <Text style={{padding: 4, textAlign: 'center', color: 'white', fontWeight: "500"}}>{headText}</Text>
+                          <Text style={{padding: 4, textAlign: 'center', color: SWATheam.SwaWhite, fontWeight: "500"}}>{headText}</Text>
                         </View>
                       </>:
                       <>
@@ -186,12 +193,12 @@ const Dashboard = ({ navigation, route }) => {
                           timeTableStructure.length <= 3 ?
                             <>
                               <View style={{ flex: 1, paddingVertical:5, backgroundColor: userData?.data?.colors?.mainTheme, borderWidth: 1, borderColor: userData?.data?.colors.hoverTheme }}>
-                                <Text style={{ padding: 4, textAlign: 'center', color: 'white', fontWeight: "500" }}>{headText}</Text>
+                                <Text style={{ padding: 4, textAlign: 'center', color: SWATheam.SwaWhite, fontWeight: "500" }}>{headText}</Text>
                               </View>
                             </> :
                             <>
                               <View style={{ width: 180, paddingVertical:5, backgroundColor: userData?.data?.colors?.mainTheme, borderWidth: 1, borderColor: userData?.data?.colors.hoverTheme }}>
-                                <Text style={{ padding: 4, textAlign: 'center', color: 'white', fontWeight: "500" }}>{headText}</Text>
+                                <Text style={{ padding: 4, textAlign: 'center', color: SWATheam.SwaWhite, fontWeight: "500" }}>{headText}</Text>
                               </View>
                             </>
                         }

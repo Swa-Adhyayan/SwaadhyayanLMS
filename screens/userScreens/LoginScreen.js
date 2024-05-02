@@ -87,14 +87,11 @@ const LoginScreen = ({navigation}) => {
                     {userType==1&&
                     <CustomInput placeHolder = {"Enter your password"} secureTextEntry={true} icon={"eye-off-outline"} onChangeText = {(val)=>handleInputChange(val,'password')} inputName={"password"}/>
                     }
-                    <View style={{position:'absolute', bottom:0, right:0, left:0}}>
-                        <Text style={{color:'red'}}>{errorMsg}</Text>
-                    </View>
                 </View>
                   <TouchableOpacity style={{backgroundColor:SWATheam.SwaBlue, borderRadius:4, padding:10, marginVertical:10}}
                   onPress={()=>
                   {
-                    setErrorMsg('');
+                    // setErrorMsg('');
                     login(userType==1?teacherUser:studentUser, userType, navigation)
                   }}
                   >

@@ -6,7 +6,6 @@ export const fetModuleActivityList = createAsyncThunk('activityTool/activityTool
   async (data)=>{
     const response = await Services.post(apiRoot.getModuleActivityData, data);
     if(response.status=="success"){
-      console.log(response, 'activity list')
       return response.data;
     } else {
       return [];
@@ -17,7 +16,7 @@ const ModuleActivityList  = createSlice({
   initialState:{
     data:{},
     loading:true,
-    isError:false
+    isError:false,
   },
   extraReducers:(builder)=>{
         builder.addCase(fetModuleActivityList.pending, (state, {payload})=>{

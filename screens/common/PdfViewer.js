@@ -8,17 +8,23 @@ import { useSelector } from 'react-redux';
 const PdfViewer = ({navigation, route}) => {
   const moduleActivityList = useSelector(state=>state.ActivityToolList)
   let pdfPath = ''
-  if(!moduleActivityList.loading){
+  if(moduleActivityList.data.length){
+    alert('hello1')
     pdfPath = moduleActivityList?.data.mainData[0]?.filePath!=undefined?moduleActivityList?.data?.mainData[0]?.filePath+'/'+moduleActivityList?.data?.mainData[0]?.uploadFileName:undefined
   }else{
-    return
+    pdfPath = route.params.url
   }
-  
     let testPath = ''
     let titleName = ''
     if(route.params.url!=undefined){
-      testPath = route.params.url
-      titleName = route.params.title
+      if(route.params.urlLink=="bookPDF"){
+        titleName = route.params.title
+        testPath = assetsPath+route.params.url
+      }else{
+        testPath = route.params.url
+        titleName = route.params.title
+      }
+
     }else if(pdfPath!=undefined){
       testPath = assetsPath+pdfPath
       titleName = moduleActivityList.data.mainData[0].chapterName
@@ -44,13 +50,13 @@ const PdfViewer = ({navigation, route}) => {
                         cache: true,
                       }}
                       onLoadComplete={(numberOfPages, filePath) => {
-                        console.log(`Number of pages: ${numberOfPages}`);
+                        // console.log(`Number of pages: ${numberOfPages}`);
                       }}
                       onPageChanged={(page, numberOfPages) => {
-                        console.log(`Current page: ${page}`);
+                        // console.log(`Current page: ${page}`);
                       }}
                       onError={error => {
-                        console.log(error);
+                        // console.log(error);
                       }}
                     //   onPressLink={uri => {
                     //     console.log(`Link pressed: ${uri}`);

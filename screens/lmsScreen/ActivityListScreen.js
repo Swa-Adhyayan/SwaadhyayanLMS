@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, } from 'react-native'
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import SwaHeader from '../common/SwaHeader'
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,18 +8,30 @@ import { GlobleData } from '../../Store'
 import Services from '../../Services';
 import { apiRoot } from '../../constant/ConstentValue';
 import BottomDrawerList from '../common/BottomDrawerList';
-
+import Orientation from 'react-native-orientation-locker';
 
 const ActivityListScreen = ({ navigation, route }) => {
-
-
   const { userData } = useContext(GlobleData)
-  const moduleActivityList = useSelector(state => state.ActivityToolList)
+  let moduleActivityList = useSelector(state => state.ActivityToolList)
+  let funBagActivityList = useSelector(state=>state.FunBagActToolList)
   const [listItem, setListItem] = useState({ list: null, status: false, type: '' })
   const [chapterID, setChapterID] = useState()
-  const bookId = useRef(route.params.item.bookID).current
+  const bookId = useRef(route?.params?.item?.bookID).current
 
   
+  if(route.params.isFun){
+    moduleActivityList={}
+  }else{
+    funBagActivityList={}
+  }
+
+  useEffect(() => {
+    const goBack = navigation.addListener('focus', () => {
+        Orientation.lockToPortrait();
+    });
+    return goBack
+}, [navigation])
+
 
   function onClickLeftIcon() {
     navigation.goBack()
@@ -39,7 +51,6 @@ const ActivityListScreen = ({ navigation, route }) => {
     if (actUrl != "") {
       const cheerio = require('react-native-cheerio');
       const response = await fetch(actUrl + '/app')
-      // console.log(JSON.stringify(response), 'checkresponse')
 
       const htmlString = await response.text()
       // console.log(htmlString, 'htmlString')
@@ -58,9 +69,9 @@ const ActivityListScreen = ({ navigation, route }) => {
         } else {
           srcPath = `${urlArray[0]}`
         }
-        if (srcPath.endsWith('mp4') || srcPath.endsWith('ogg')) {
+        if (srcPath.endsWith('mp4') || srcPath.endsWith('ogg')){
           // This Video of elearning
-          navigation.navigate('videoView',)
+          navigation.navigate('videoView', {url:srcPath, data:item})
         } else if ((bookId == 3 || bookId == 7)) {
           // This PDF of learning without downloadable
           navigation.navigate('pdfView', { url: srcPath, title: item.activityName})
@@ -74,7 +85,7 @@ const ActivityListScreen = ({ navigation, route }) => {
           navigation.navigate('activityView', {url:actUrl, title:item.activityName})
       }else{
         // GlossaryMoralSummaryLbdView//
-        navigation.navigate('activityView', {url:actUrl + item.activityUrl, title:item.activityName})
+        navigation.navigate('activityView', {url:actUrl, title:item.activityName})
       }
     } else {
       Services.post(apiRoot.getLearningRightToolsList, payload)
@@ -117,7 +128,14 @@ const ActivityListScreen = ({ navigation, route }) => {
             return { ...prev, status: false }
           })
           if (res.data.length > 1) {
-            navigation.navigate('chapterItem')
+            sendData = {
+              screenName: route.params.sendData.subjectID == 1 ? item.subPartNameLang2 : item.subPartName.replace('<br>', ''),
+              subTypeID: route.params.sendData.subTypeID,
+              classID: (userData?.data?.userTypeID == 4) || (userData?.data?.userTypeID == 2) ? route.params.sendData.classID : userData.data.classID,
+              subjectID: route.params.sendData.subjectID
+
+            }
+            navigation.navigate('chapterItem', {data:res.data, sendData:sendData, navigation})
           } else if (res.data[0]?.uploadFileName?.split('.').pop() === "pdf") {
             navigation.navigate('pdfView', res.data[0])
           } else if (res.data[0]?.uploadFileName?.split('.').pop() === "mp4") {
@@ -128,11 +146,19 @@ const ActivityListScreen = ({ navigation, route }) => {
         }
       })
   }
+
+  
+
+
   return (
-    <View style={{ flex: 1, marginTop: 20 }}>
-      {/* <SwaHeader title={route.params.sendData.userName} leftIcon={"arrowleft"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon}/> */}
-      {!moduleActivityList.loading &&
-       <SubIconActivityList selectedModuleItem={route.params.item} toolItems={moduleActivityList.data} getModuleActivityData ={getModuleActivityData} navigation={navigation}/>
+    <View style={{flex: 1, marginTop: 20}}>
+      <SwaHeader title={route.params.sendData.screenName.replace('\r\n','')} leftIcon={"arrowleft"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon}/>
+      {moduleActivityList?.data?.mainData?.length?
+       <SubIconActivityList selectedModuleItem={route.params.item} toolItems={moduleActivityList.data} getModuleActivityData ={getModuleActivityData} navigation={navigation}/>:
+       null
+      }
+      {funBagActivityList?.data?.length&&
+       <SubIconActivityList selectedModuleItem={route.params.sendData} toolItems={funBagActivityList.data} getModuleActivityData ={getModuleActivityData} navigation={navigation}/>
       }
       {listItem.status &&
         <BottomDrawerList closeModule={closeModule} listItem={listItem} getSelectedItem={getSelectedItem} languageID={route.params.sendData.subTypeID} />

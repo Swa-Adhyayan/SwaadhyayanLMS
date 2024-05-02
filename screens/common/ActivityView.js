@@ -12,7 +12,7 @@ const ActivityView = ({navigation, route}) => {
     }
   return (
     <View style={{flex:1, backgroundColor:'green', marginTop:20}}>
-    <SwaHeader title={route.params.title} leftIcon={"arrowleft"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon}/>
+    <SwaHeader title={route.params.title.replace('<br>','')} leftIcon={"arrowleft"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon}/>
       <WebView
         source = {{uri:route.params.url}}
         javaScriptEnabled={true}

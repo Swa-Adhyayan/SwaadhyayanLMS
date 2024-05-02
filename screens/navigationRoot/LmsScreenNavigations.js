@@ -11,6 +11,12 @@ import ChapterItemList from '../common/ChapterItemList'
 import ActivityView from '../common/ActivityView'
 import VideoView from '../common/VideoView'
 import ViewFunBagScreen from '../lmsScreen/ViewFunBagScreen'
+import SeptAttempt from '../lmsScreen/SEPT/SeptAttempt'
+import AcademicReport from '../lmsScreen/SEPT/septReport/AcademicReport'
+import LearningReport from '../lmsScreen/SEPT/septReport/LearningReport'
+import MultipleIntellReport from '../lmsScreen/SEPT/septReport/MultipleIntellReport'
+import KnowingMeReport from '../lmsScreen/SEPT/septReport/KnowingMeReport'
+import BrainDominReport from '../lmsScreen/SEPT/septReport/BrainDominReport'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -26,7 +32,15 @@ return (
       <Stack.Screen name = "pdfView" component={PdfViewer} options={{headerShown:false,}}/>
       <Stack.Screen name = "chapterItem" component={ChapterItemList} options={{headerShown:false}}/>
       <Stack.Screen name = "activityView" component={ActivityView} options={{headerShown:false}}/>
-      <Stack.Screen name = "videoView" component={VideoView} options={{headerShown:true}}/>
+      <Stack.Screen name = "videoView" component={VideoView} options={{headerShown:false}}/>
+      <Stack.Screen name = "septAttempt" component={SeptAttempt} options={{headerShown:false}}/>
+      {/* report */}
+      <Stack.Screen name = "septAcademicReport" component={AcademicReport} options={{headerShown:false}}/>
+      <Stack.Screen name = "septLearningReport" component={LearningReport} options={{headerShown:false}}/>
+      <Stack.Screen name = "septMultipleIntellReport" component={MultipleIntellReport} options={{headerShown:false}}/>
+      <Stack.Screen name = "septKnowingMeReport" component={KnowingMeReport} options={{headerShown:false}}/>
+      <Stack.Screen name = "septBrainDominReport" component={BrainDominReport} options={{headerShown:false}}/>
+      {/* report */}
     </Stack.Navigator>
   )
 }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import React,{useState, useEffect} from 'react';
 import Services from './Services';
 import { apiRoot, baseURL } from './constant/ConstentValue';
@@ -36,6 +36,7 @@ export default function Store({children}){
     }
     Services.post(apiRoot.appLogin, payload)
     .then((res)=>{
+      console.log(res,' check Login')
       if(res.status=="success"){
         AsyncStorage
         .setItem("logedInUserdata", JSON.stringify(res))
@@ -46,6 +47,7 @@ export default function Store({children}){
         })
         navigation.navigate('home')
       }else if(res.status=="error"){
+        Alert.alert('Info!', res.message)
         setUserData((prev)=>{
           return{...prev, message:res.message}
         })
@@ -59,8 +61,16 @@ export default function Store({children}){
     
   }
   // ---------------- login function end --------------- //
+   // --------------- logout function start -------------//
+   function logOut(navigation) {
+    AsyncStorage.removeItem('logedInUserdata')
+    setUserData((prev)=>{
+      return{...prev, data:null, isLogin:false}
+    })
+  }
+   // --------------- logout function end -------------//
   return (
-    <GlobleData.Provider value = {{login, userData}}>
+    <GlobleData.Provider value = {{login, logOut, userData}}>
       {children}
     </GlobleData.Provider>
   )

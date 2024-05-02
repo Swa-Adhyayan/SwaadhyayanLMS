@@ -1,10 +1,50 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image } from 'react-native'
+import React, { useContext } from 'react'
+import { SWATheam } from '../../constant/ConstentValue'
+import { GlobleData } from '../../Store'
+import {Drawer} from 'react-native-paper'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const SwaDrawer = () => {
+const SwaDrawer = ({navigation, route}) => {
+  const { userData, logOut } = useContext(GlobleData)
   return (
-    <View style={{marginTop:20}}>
-      <Text>SwaDrawer</Text>
+    <View style={{flex:1, marginTop: 20 }}>
+      <View style={{ backgroundColor: userData.data.colors.mainTheme, height: 150, justifyContent: 'flex-end', paddingBottom: 10 }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ height: 65, width: 65, borderRadius: 50,}}>
+            <Image source={require('../assets/SW_Logo.png')} style={{ width: '100%', height: '100%'}}/>
+          </View>
+          <View style={{justifyContent:'center', alignItems:'center', padding:10,}}>
+        <Text style={{color:SWATheam.SwaWhite, fontWeight:'500'}}>{userData.data.fullname}</Text>
+      </View>
+        </View>
+      </View>
+      
+      <View style={{flex:1, marginTop:10}}>
+    <Drawer.Section
+      showDivider={false}>
+      <Drawer.Item
+        label="Home"
+        icon={({size}) => <AntDesign color={userData.data.colors.mainTheme} size={size} name='user'/>}
+        onPress={() => {navigation.closeDrawer()}}
+      />
+      <Drawer.Item
+        label="Contact Us"
+        icon={({size}) =><Ionicons color={userData.data.colors.mainTheme} size={size} name='call-outline'/>}
+        onPress={()=>{navigation.closeDrawer()}}
+      />
+      <Drawer.Item
+        label="Log Out"
+        icon={({size}) => <AntDesign color={userData.data.colors.mainTheme} size={size} name='logout'/>}
+        onPress={(() => {logOut(navigation)})}
+      />
+    </Drawer.Section>
+    </View>
+    <View style={{height:25, borderTopWidth:.5, justifyContent:'center', alignItems:'center'}}>
+        <Text style={{textAlign:'center', fontSize:12}}>V-1</Text>
+      </View>
+
     </View>
   )
 }

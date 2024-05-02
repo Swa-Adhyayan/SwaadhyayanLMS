@@ -6,7 +6,7 @@ import { GlobleData } from '../../Store'
 
 
 
-const BottomDrawerList = ({ closeModule, listItem, type, getSelectedItem, getFunBagActivity, selectedField, navigation, languageID, suTypeID }) => {
+const BottomDrawerList = ({ closeModule, listItem, type, getSelectedItem, selectedField, navigation, languageID, suTypeID }) => {
   const {userData} = useContext(GlobleData)
 
   let ListName = ''
@@ -59,11 +59,6 @@ const BottomDrawerList = ({ closeModule, listItem, type, getSelectedItem, getFun
                     return (
                       <TouchableOpacity style={{ height: 140, marginVertical: 10, width: "40%", justifyContent: 'center', alignItems: 'center', backgroundColor: userData.data.colors.liteTheme, borderRadius: 6, justifyContent: 'space-around', padding: 8 }} key={item.subPartID}
                             onPress={() =>{
-                              if(listItem?.rootName=='funBagView'){
-                                alert('hari')
-                                getFunBagActivity(item, listItem.subTypeID, navigation)
-                              }else{
-                              }
                                 getSelectedItem(item, navigation)
 
                             }
