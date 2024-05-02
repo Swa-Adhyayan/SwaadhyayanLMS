@@ -125,7 +125,7 @@ const SubIconsScreen = ({ navigation, route }) => {
             });
 
         }else{
-            alert('coming soon!');
+            alert('coming soon!')
         }
 
     }
