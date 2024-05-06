@@ -10,6 +10,8 @@ import { SWATheam } from '../../constant/ConstentValue';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const VideoView = ({navigation, route}) => {
+
+    console.log(route, 'hari')
     let videoUrl = ''
     if(route.params.siteUrl!=undefined||route.params.siteUrl!=null){
         videoUrl = route.params.siteUrl+route.params.filePath+'/'+route.params.uploadFileName

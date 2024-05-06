@@ -8,7 +8,7 @@ const {width, height} = Dimensions.get('window')
 const SwaHeader = ({title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon}) => {
   const {userData} = useContext(GlobleData)
   return (
-    <View style={[styles.header, styles.shadowProp,{backgroundColor:userData?.data?.colors?.mainTheme,}]}>
+    <View style={[styles.header, {backgroundColor:userData?.data?.colors?.mainTheme, borderBottomWidth:.5, borderColor:'rgba(0, 0, 0, 0.8)'}]}>
       <TouchableOpacity style={styles.btn}
       onPress={()=>onClickLeftIcon()}
       >
@@ -31,7 +31,7 @@ export default SwaHeader
 const styles = StyleSheet.create({
   header:{
     width:width,
-    height:50,
+    height:55,
     flexDirection:'row',
     justifyContent:'space-between',
     // marginTop:Platform.OS === 'android'?24:0,
@@ -39,10 +39,7 @@ const styles = StyleSheet.create({
     elevation:9
     },
   shadowProp: {
-    shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    borderBottomWidth:1
   },
     btn:{
         width:40,

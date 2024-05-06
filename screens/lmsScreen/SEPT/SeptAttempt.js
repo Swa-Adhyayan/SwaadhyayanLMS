@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native"
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, useWindowDimensions} from "react-native"
+import RenderHtml from 'react-native-render-html';
 import SwaHeader from '../../common/SwaHeader';
 import Services from '../../../Services';
 import { SWATheam, apiRoot } from '../../../constant/ConstentValue';
@@ -19,8 +20,13 @@ const sec = date.getSeconds();
 const time = hour + ':' + min + ':' + sec;
 const startTimeArr = [time]
 
+
+
+
+
 const SeptAttempt = ({ navigation, route }) => {
 
+    const { width } = useWindowDimensions();
     const { userData } = useContext(GlobleData)
     const [queData, setQueData] = useState({ data: null, status: true })
     const [count, setCount] = useState(0)
@@ -79,7 +85,6 @@ const SeptAttempt = ({ navigation, route }) => {
     }
 
     const submitData = (classID, queLen, testID) => {
-        alert('hello')
 
 
         const schoolCode = route.params.schoolCode
@@ -206,6 +211,18 @@ const SeptAttempt = ({ navigation, route }) => {
         setSubmitKsg(false)
     }
 
+    const tagsStyles = {
+        body: {
+            fontSize: 17,
+            color: SWATheam.SwaBlack
+          },
+        p: {
+          fontSize: 17,
+          color: SWATheam.SwaBlack
+        }
+      };
+    
+
 
     return (
         <>
@@ -252,10 +269,14 @@ const SeptAttempt = ({ navigation, route }) => {
                                 <View style={{ flex: 1, backgroundColor: '#fff', padding: 10, paddingVertical: 20 }}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <View style={{ width: 25 }}>
-                                            <Text>{count + 1}.</Text>
+                                            <Text style={{fontSize:17, color:SWATheam.SwaBlack}}>{count + 1}.</Text>
                                         </View>
                                         <View style={{ flex: 1, marginBottom: 5 }}>
-                                            <Text style={{ fontSize: font17 }}>{queData?.data[count]?.questionText}</Text>
+                                        <RenderHtml
+                                            contentWidth={width}
+                                            source={{html:queData?.data[count]?.questionText}}
+                                            tagsStyles={tagsStyles}
+                                            />
                                         </View>
                                     </View>
                                     {queData?.data[count]?.commonImage != null &&
