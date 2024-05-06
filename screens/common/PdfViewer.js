@@ -9,7 +9,6 @@ const PdfViewer = ({navigation, route}) => {
   const moduleActivityList = useSelector(state=>state.ActivityToolList)
   let pdfPath = ''
   if(moduleActivityList.data.length){
-    alert('hello1')
     pdfPath = moduleActivityList?.data.mainData[0]?.filePath!=undefined?moduleActivityList?.data?.mainData[0]?.filePath+'/'+moduleActivityList?.data?.mainData[0]?.uploadFileName:undefined
   }else{
     pdfPath = route.params.url
@@ -40,7 +39,7 @@ const PdfViewer = ({navigation, route}) => {
     }
   return (
     <View style={{flex:1, marginTop:20}}>
-    <SwaHeader title={titleName} leftIcon={"arrowleft"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon}/>
+    {/* <SwaHeader title={titleName} leftIcon={"arrowleft"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon}/> */}
 
     <View style={styles.container}>
                 <Pdf

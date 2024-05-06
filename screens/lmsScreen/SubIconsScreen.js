@@ -29,13 +29,14 @@ const SubIconsScreen = ({ navigation, route }) => {
     const [selectedField, setSelectedField] = useState({ class: null, section: null, subject: null, book: null })
     const [listItem, setListItem] = useState({ list: null, status: false, type: '' })
     const [toolItems, setToolItems] = useState()
-    const [funBagActivity, setFunBagActivity] = useState({ mainData: null, status: false })
     const [loading, setLoading] = useState(true)
     const [intro, setIntor] = useState({ selectedSubIcon: null, instruction: false })
     const [viewSeptReport, setViewSeptReport] = useState({data:null, status:false})
+    const [viewTimeTable, setViewTimeTable] = useState(false)
 
     const toolName = route.params.getMainIconsData.iconName
     const mainIconID = route.params.mainIconID
+
 
 
 
@@ -46,11 +47,12 @@ const SubIconsScreen = ({ navigation, route }) => {
         if (mainIconID == 27) {
             setLoading(true)
             const payload = {
+                "userRefID": userData?.data?.userRefID,
                 "schoolCode": userData?.data?.schoolCode,
                 "academicYear": userData?.data?.academicYear,
                 "userTypeID": userData?.data?.userTypeID,
-                "classID": (userData?.data?.userTypeID == 4) || (userData?.data?.userTypeID == 2) ? selectedField.class.classID : userData.data.classID,
-                "sectionID": (userData?.data?.userTypeID == 4) || (userData?.data?.userTypeID == 2) ? selectedField.section.sectionID : userData.data.sectionID,
+                "classID": (userData?.data?.userTypeID == 4) || (userData?.data?.userTypeID == 2)? selectedField.class.classID : userData.data.classID,
+                "sectionID": (userData?.data?.userTypeID == 4) || (userData?.data?.userTypeID == 2)? selectedField.section.sectionID : userData.data.sectionID,
             }
             Services.post(apiRoot.septModules, payload)
                 .then((res) => {
@@ -61,7 +63,7 @@ const SubIconsScreen = ({ navigation, route }) => {
                         })
                     }
                 })
-        } else {
+        }else{
             const subIconPayload = {
                 "userRefID": userData?.data?.userRefID,
                 "schoolCode": userData?.data?.schoolCode,
@@ -99,14 +101,13 @@ const SubIconsScreen = ({ navigation, route }) => {
     }
 
     function getIconDetail(val) {
-
         if (val.testID != undefined) {
-            if(val.isSeptAttempt!=null){
+            if(val.isSeptAttempt){
                 setViewSeptReport((prev)=>{
                     return{...prev, data:val, status:true}
                 });
                 setIntor((prev) => {
-                    return { ...prev, selectedSubIcon: val,}
+                    return { ...prev, selectedSubIcon: val, instruction: false}
                 });
             }else{
                 setIntor((prev) => {
@@ -121,17 +122,14 @@ const SubIconsScreen = ({ navigation, route }) => {
             setToolItems()
             setSelectField(true)
             setSelectedIcon((prev) => {
-                return { ...prev, name: val.getSubIconsData.subIconName, subIconID: val.getSubIconsData.subIconID }
+                return { ...prev, name: val.getSubIconsData.subIconName, subIconID: val.getSubIconsData.subIconID}
             });
-
         }else{
             alert('coming soon!')
         }
-
     }
 
     function getSeptReport(item){
-        
         if(item.data.testID==1){
             navigation.navigate('septAcademicReport', item.data)
         }else if(item.data.testID==2){
@@ -143,7 +141,6 @@ const SubIconsScreen = ({ navigation, route }) => {
         }else if(item.data.testID==5){
             navigation.navigate('septBrainDominReport', item.data)
         }
-        
     }
 
     function getListItem(type) {
@@ -275,7 +272,7 @@ const SubIconsScreen = ({ navigation, route }) => {
                 return { ...prev, subject: item, book: null }
             })
             setListItem((prev) => {
-                return { ...prev, status: false }
+                return {...prev, status: false}
             })
             setToolItems()
         } else if (type == "book") {

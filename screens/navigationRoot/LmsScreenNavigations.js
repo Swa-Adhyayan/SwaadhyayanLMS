@@ -17,6 +17,7 @@ import LearningReport from '../lmsScreen/SEPT/septReport/LearningReport'
 import MultipleIntellReport from '../lmsScreen/SEPT/septReport/MultipleIntellReport'
 import KnowingMeReport from '../lmsScreen/SEPT/septReport/KnowingMeReport'
 import BrainDominReport from '../lmsScreen/SEPT/septReport/BrainDominReport'
+import TimeTable from '../lmsScreen/TimeTable'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -41,6 +42,9 @@ return (
       <Stack.Screen name = "septKnowingMeReport" component={KnowingMeReport} options={{headerShown:false}}/>
       <Stack.Screen name = "septBrainDominReport" component={BrainDominReport} options={{headerShown:false}}/>
       {/* report */}
+      {/* timeTable */}
+      <Stack.Screen name = "timeTable" component={TimeTable} options={{headerShown:false}}/>
+      {/* timeTable */}
     </Stack.Navigator>
   )
 }

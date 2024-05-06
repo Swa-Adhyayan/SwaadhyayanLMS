@@ -104,7 +104,7 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                             </View>
                             <View style={styles.flexContainer}>
                                 <View style={{ width: 25 }}><Text style={styles.textClr}>4.</Text></View>
-                                <View style={{ flex: 1 }}><Text style={styles.textClr}>It is important that these questions are attempted by the learner himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the academic proficiency of the learner can be tested accurately. The learner can however, be assisted if he/she has problem in understanding the meanings of words/questions.</Text></View>
+                                <View style={{ flex: 1 }}><Text style={styles.textClr}>It is important that these questions are attempted by the learner himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the academic proficiency of the learner can be tested accurately. The learner can however, be assisted if he/she has problem in understanding the meaning of words/questions.</Text></View>
                             </View>
                         </View>
                         <View style={styles.flexContainer}>
@@ -130,7 +130,7 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                         </View>
                         <View style={styles.flexContainer}>
                             <View style={{ width: 25 }}><Text style={styles.textClr}>5.</Text></View>
-                            <View style={{ flex: 1 }}><Text style={styles.textClr}>It is important that these questions are attempted by the learner himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the Learning Style can be examined accurately. The learner can however, be assisted if he/she has any problem in understanding the meanings of words/questions.</Text></View>
+                            <View style={{ flex: 1 }}><Text style={styles.textClr}>It is important that these questions are attempted by the learner himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the Learning Style can be examined accurately. The learner can however, be assisted if he/she has any problem in understanding the meaning of words/questions.</Text></View>
                         </View>
                         <View style={[styles.textClr, { paddingHorizontal: 5, marginBottom: 10 }]}>
                             <Text style={styles.textClr}>The data and results represented by the report generated for this test are purely conditional. It may change according to the skills and/or intelligence acquired by the learner in his/her lifetime.</Text>
@@ -177,7 +177,7 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                                 <View style={{ width: 100, borderRightWidth: 1, borderColor: '#0c8781' }}><Text style={[styles.textClr, { textAlign: 'center', paddingHorizontal: 5, paddingVertical: 5 }]}>Visual</Text></View>
                                 <View style={{ flex: 1 }}>
                                     <Text style={[styles.textClr,{ paddingHorizontal: 5, paddingVertical: 5 }]}>
-                                        Capacity to think in images and pictures, to visualize accurately and abstractly
+                                        Capacity to think in images and pictures, to visualise accurately and abstractly
                                     </Text>
                                 </View>
                             </View>
@@ -201,7 +201,7 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                                 <View style={{ width: 100, borderRightWidth: 1, borderColor: '#0c8781' }}><Text style={[styles.textClr, { textAlign: 'center', paddingHorizontal: 5, paddingVertical: 5 }]}>Naturalist</Text></View>
                                 <View style={{ flex: 1 }}>
                                     <Text style={[styles.textClr,{ paddingHorizontal: 5, paddingVertical: 5 }]}>
-                                        Ability to recognize and categorize plants, animals and other objects in nature
+                                        Ability to recognise and categorise plants, animals and other objects in nature
                                     </Text>
                                 </View>
                             </View>
@@ -247,16 +247,16 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                                 </View>
                             </View>
                             <View style={styles.flexContainer}>
-                                <View style={{ width: 25 }}><Text style={styles.textClr}>3.</Text></View>
+                                <View style={{ width: 25 }}><Text style={styles.textClr}>4.</Text></View>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.textClr}>
-                                        It is important that these questions are attempted by the student himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the Multiple Intelligences can be tested accurately. The student can however, be assisted if he/she has problem in understanding the meanings of words/questions.
+                                        It is important that these questions are attempted by the student himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the Multiple Intelligences can be tested accurately. The student can however, be assisted if he/she has problem in understanding the meaning of words/questions.
                                     </Text>
                                 </View>
                             </View>
                             <View style={styles.flexContainer}>
-                                <View style={{ width: 25 }}><Text style={styles.textClr}>4.</Text></View>
-                                <View style={{ flex: 1 }}><Text style={styles.textClr}>It is important that these questions are attempted by the learner himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the academic proficiency of the learner can be tested accurately. The learner can however, be assisted if he/she has problem in understanding the meanings of words/questions.</Text></View>
+                                <View style={{ width: 25 }}><Text style={styles.textClr}>5.</Text></View>
+                                <View style={{ flex: 1 }}><Text style={styles.textClr}>It is important that these questions are attempted by the learner himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the academic proficiency of the learner can be tested accurately. The learner can however, be assisted if he/she has problem in understanding the meaning of words/questions.</Text></View>
                             </View>
                         </View>
                         <View style={styles.flexContainer}>
@@ -282,7 +282,7 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                                 <View style={{ width: 25 }}><Text style={styles.BtextClr}>1.</Text></View>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.BtextClr}>
-                                        The Knowing Me test has  <Text style={[styles.BtextClr, { fontWeight: 'bold' }]}>{totalQue} questions.</Text> The maximum time allotted for the entire test is   <Text style={[styles.BtextClr, { fontWeight: 'bold' }]}>{testTime}.</Text> The student is required to attempt and submit all the questions within the given time frame.
+                                        The Knowing Me test has <Text style={[styles.BtextClr, { fontWeight: 'bold' }]}>{totalQue} questions.</Text> The maximum time allotted for the entire test is <Text style={[styles.BtextClr, { fontWeight: 'bold' }]}>{testTime}.</Text> The student is required to attempt and submit all the questions within the given time frame.
                                     </Text>
                                 </View>
                             </View>
@@ -303,10 +303,10 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                                 </View>
                             </View>
                             <View style={styles.flexContainer}>
-                                <View style={{ width: 25 }}><Text style={styles.BtextClr}>3.</Text></View>
+                                <View style={{ width: 25 }}><Text style={styles.BtextClr}>4.</Text></View>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.BtextClr}>
-                                        It is important that these questions are attempted by the student himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the learner's personality can be tested accurately. The student can however, be assisted if he/she has problem in understanding the meanings of words/questions.
+                                        It is important that these questions are attempted by the student himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that the learner's personality can be tested accurately. The student can however, be assisted if he/she has problem in understanding the meaning of words/questions.
                                     </Text>
                                 </View>
                             </View>
@@ -331,7 +331,7 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                                 <View style={{ width: 25 }}><Text style={styles.BtextClr}>1.</Text></View>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.BtextClr}>
-                                        The Brain Dominance test has  <Text style={[styles.BtextClr, { fontWeight: 'bold' }]}>{totalQue} questions.</Text> The maximum time allotted for the entire test is   <Text style={[styles.BtextClr, { fontWeight: 'bold' }]}>{testTime}.</Text> The student is required to attempt and submit all the questions within the given time frame.
+                                        The Brain Dominance test has <Text style={[styles.BtextClr, { fontWeight: 'bold' }]}>{totalQue} questions.</Text> The maximum time allotted for the entire test is <Text style={[styles.BtextClr, { fontWeight: 'bold' }]}>{testTime}.</Text> The student is required to attempt and submit all the questions within the given time frame.
                                     </Text>
                                 </View>
                             </View>
@@ -340,7 +340,7 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.BtextClr}>
                                         After the test is completed, a report is generated which displays the percentage of left-brain
-                                        <Text style={{ color: 'red' }}> (the left-side of the brain is considered to be adept at tasks that involve logic, language, and analytical thinking) </Text>  and right-brain <Text style={{ color: 'red' }}>(the right side of the brain is best at expressive and creative tasks) </Text>
+                                        <Text style={{ color: 'red' }}> (the left-side of the brain is considered to be adept at tasks that involves logic, language, and analytical thinking)</Text> and right-brain <Text style={{ color: 'red' }}>(the right side of the brain is best at expressive and creative tasks) </Text>
                                         dominance in the learner.
                                     </Text>
                                 </View>
@@ -357,7 +357,7 @@ const AcademicProfIntro = ({intro, getAttemptedScreen}) => {
                                 <View style={{ width: 25 }}><Text style={styles.BtextClr}>3.</Text></View>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.BtextClr}>
-                                        It is important that these questions are attempted by the student himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that brain dominance can be tested accurately. The student can however, be assisted if he/she has problem in understanding the meanings of words/questions.
+                                        It is important that these questions are attempted by the student himself/herself, without any sort of influence from teachers/parents with respect to the answers, so that brain dominance can be tested accurately. The student can however, be assisted if he/she has problem in understanding the meaning of words/questions.
                                     </Text>
                                 </View>
                             </View>

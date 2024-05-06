@@ -9,13 +9,20 @@ import { GlobleData } from '../../Store'
 import IconsContainer from '../common/IconsContainer'
 import Loader from '../common/Loader'
 
-const activeMainIconIds = [4,17,28,36,27]
+
+
+// Time table  16,32,36 //
 
 const Dashboard = ({ navigation, route }) => {
   const { userData } = useContext(GlobleData)
+  console.log(JSON.stringify(userData), 'userData')
 
   const [deshboardData, setDeshboardData] = useState({ icons: null, timeTable: null, iconUrl: '', status:true })
   const [timeTableStructure, setTimeTableStructure] = useState();
+
+  const activeMainIconIds = [4,17,28,36,27]
+  const timeTable = [16,32,36]
+
   const weekDays = [
     'Sunday',
     'Monday',
@@ -148,8 +155,12 @@ const Dashboard = ({ navigation, route }) => {
     setIsInstruction(true)
   }
   function getIconDetail(item){
+    console.log(item, 'mainIcons Details')
     if(activeMainIconIds.includes(item.getMainIconsData.mainIconID)){
       navigation.navigate("subIconScreen", item)
+    }else if(timeTable.includes(item.iconData.iconID)){
+      navigation.navigate('timeTable', item)
+
     }else{
       alert('coming soon!')
     }
@@ -222,29 +233,21 @@ const Dashboard = ({ navigation, route }) => {
                         <Text style={{textAlign:'center', color:SWATheam.SwaGray}}>{item.body.className} - {item.body.sectionName}</Text>:
                         <Text style={{textAlign:'center', color:SWATheam.SwaGray}}>{item.body.teacherName}</Text>
                         }
-
                       </View>
                     }
-                    
                     </View>
                   </View>
                 )
               })}
           </View>
             </ScrollView>
-
         </View>
-
       </View>
-
     </View>
     }
-
     </>
-    
   )
 }
-
 export default Dashboard
 
 const styles = StyleSheet.create({})
