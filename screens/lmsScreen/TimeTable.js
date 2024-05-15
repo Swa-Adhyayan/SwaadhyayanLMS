@@ -885,7 +885,6 @@ const TimeTable = ({navigation, route}) => {
 
             </View>
 
-
         </>
     )
 }
