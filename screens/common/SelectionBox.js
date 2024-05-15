@@ -8,7 +8,7 @@ const SelectionBox = ({getListItem, type, placeholder, selectedField }) => {
     const {userData} = useContext(GlobleData)
    
     return (
-        <TouchableOpacity style={{ flexDirection: 'row', borderWidth: 1, borderRadius: 4, borderColor: userData.data.colors.hoverTheme, backgroundColor: SWATheam.SwaWhite, marginVertical: 5 }}
+        <TouchableOpacity style={{ flexDirection: 'row', borderWidth: 1, borderRadius: 4, borderColor: userData.data.colors.hoverTheme, backgroundColor: SWATheam.SwaWhite, marginVertical: 5, padding:2}}
             onPress={() => getListItem(type)}
         >
             <View style={{ flex: 1, padding: 10, }}>

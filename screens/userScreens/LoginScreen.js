@@ -58,6 +58,7 @@ const LoginScreen = ({navigation}) => {
         })
     }
   }
+  console.log(userData.isLogin, 'hello')
     return (
         <View style={{flex: 1, backgroundColor:SWATheam.SwaBlue}}>
             <View style={{height: '18%'}}>
@@ -73,11 +74,11 @@ const LoginScreen = ({navigation}) => {
                 <View>
                 <ScrollView>
                 <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical: 8}}>
-                    <TouchableOpacity style={{backgroundColor: userType==2?SWATheam.SwaBlue:SWATheam.SwaLightBlue, padding: 10, borderTopLeftRadius: 6, borderBottomLeftRadius: 6, width: '50%' }}
+                    <TouchableOpacity style={{backgroundColor: userType==2?SWATheam.SwaBlue:SWATheam.SwaLightBlue, padding: 12, borderTopLeftRadius: 6, borderBottomLeftRadius: 6, width: '50%' }}
                     onPress={()=>selectUserType(studentId)}>
                         <Text style={{ textAlign: 'center', fontWeight: '500', color:userType==2?SWATheam.SwaWhite:SWATheam.SwaBlack }}>Student</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{backgroundColor: userType==1?SWATheam.SwaBlue:SWATheam.SwaLightBlue, padding: 10, borderTopRightRadius: 6, borderBottomRightRadius: 6, width: '50%'}}
+                    <TouchableOpacity style={{backgroundColor: userType==1?SWATheam.SwaBlue:SWATheam.SwaLightBlue, padding: 12, borderTopRightRadius: 6, borderBottomRightRadius: 6, width: '50%'}}
                       onPress={()=>selectUserType(teacherId)}>
                         <Text style={{ textAlign: 'center', fontWeight: '500', color:userType==1?SWATheam.SwaWhite:SWATheam.SwaBlack}}>Teacher</Text>
                     </TouchableOpacity>
@@ -88,7 +89,7 @@ const LoginScreen = ({navigation}) => {
                     <CustomInput placeHolder = {"Enter your password"} secureTextEntry={true} icon={"eye-off-outline"} onChangeText = {(val)=>handleInputChange(val,'password')} inputName={"password"}/>
                     }
                 </View>
-                  <TouchableOpacity style={{backgroundColor:SWATheam.SwaBlue, borderRadius:4, padding:10, marginVertical:10}}
+                  <TouchableOpacity style={{backgroundColor:SWATheam.SwaBlue, borderRadius:6, padding:12, marginVertical:10}}
                   onPress={()=>
                   {
                     // setErrorMsg('');

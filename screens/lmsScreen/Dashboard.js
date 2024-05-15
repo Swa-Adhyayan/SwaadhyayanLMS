@@ -15,13 +15,16 @@ import Loader from '../common/Loader'
 
 const Dashboard = ({ navigation, route }) => {
   const { userData } = useContext(GlobleData)
-  console.log(JSON.stringify(userData), 'userData')
+  // console.log(JSON.stringify(userData), 'userData')
 
   const [deshboardData, setDeshboardData] = useState({ icons: null, timeTable: null, iconUrl: '', status:true })
   const [timeTableStructure, setTimeTableStructure] = useState();
 
-  const activeMainIconIds = [4,17,28,36,27]
+  const activeMainIconIds = [4,17,28,36,7,20,30,37]
   const timeTable = [16,32,36]
+  // septMainIconID = 27
+  // const reportMainIconsIDs = [7,20,30,37]
+  
 
   const weekDays = [
     'Sunday',
@@ -133,9 +136,9 @@ const Dashboard = ({ navigation, route }) => {
     const tableData = [];
     for( let i = 0; i< tableSturcture.length; i++ ) {
       const tempObj = {};
-      const tableHeading = tableSturcture[i]['heading'];
+      const tableHeading = tableSturcture[i]['heading'];            
+      tempObj['head'] = tableHeading;
       for ( let j = 0; j < cellData.length; j++ ) {
-        tempObj['head'] = tableHeading;
         if( tableSturcture[i].periodSeq == cellData[j].periodSeq ) {
           tempObj['body'] = cellData[j];
         } 
@@ -155,12 +158,11 @@ const Dashboard = ({ navigation, route }) => {
     setIsInstruction(true)
   }
   function getIconDetail(item){
-    console.log(item, 'mainIcons Details')
+    // console.log(item, 'mainIcons Details')
     if(activeMainIconIds.includes(item.getMainIconsData.mainIconID)){
       navigation.navigate("subIconScreen", item)
     }else if(timeTable.includes(item.iconData.iconID)){
       navigation.navigate('timeTable', item)
-
     }else{
       alert('coming soon!')
     }
@@ -173,15 +175,15 @@ const Dashboard = ({ navigation, route }) => {
     {deshboardData.status?
     <Loader/>:
     <View style={{ flex: 1, marginTop: 20, backgroundColor: userData?.data?.colors.liteTheme }}>
-      <SwaHeader title={'Swa-Adhyayan LMS'} leftIcon={"bars"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon} />
+      <SwaHeader title={'Swa-Adhyayan LMS'} leftIcon={"bars"} onClickLeftIcon={onClickLeftIcon}/>
       <IconsContainer deshboardData={deshboardData} getIconDetail = {getIconDetail} type={"mainIcon"}/>
       <View style={{ paddingHorizontal: 10, marginTop: 20 }}>
-        <View style={{}}>
+        <View style={{width:'100%'}}>
           <View style={{ backgroundColor: userData?.data?.colors?.mainTheme, padding: 8, borderRightWidth:1, borderLeftWidth:1, borderColor: userData?.data?.colors.hoverTheme }}>
             <Text style={{ textAlign: 'center', color: SWATheam.SwaWhite, fontWeight:'bold', textTransform:'uppercase'}}> {dayname} Time Table</Text>
           </View>
-            <ScrollView horizontal>
-          <View style={{ flexDirection: 'row'}}>
+            <ScrollView horizontal style={{backgroundColor:SWATheam.SwaWhite}}>
+          <View style={{ flexDirection: 'row',}}>
               {timeTableStructure?.map((item, index) => {
                 let headText = ''
                 if (item.head == "Prayer" || item.head == "Recess" || item.head == "Break") {
@@ -203,7 +205,7 @@ const Dashboard = ({ navigation, route }) => {
                         {
                           timeTableStructure.length <= 3 ?
                             <>
-                              <View style={{ flex: 1, paddingVertical:5, backgroundColor: userData?.data?.colors?.mainTheme, borderWidth: 1, borderColor: userData?.data?.colors.hoverTheme }}>
+                              <View style={{ flex:1, paddingVertical:5, backgroundColor: userData?.data?.colors?.mainTheme, borderWidth: 1, borderColor: userData?.data?.colors.hoverTheme }}>
                                 <Text style={{ padding: 4, textAlign: 'center', color: SWATheam.SwaWhite, fontWeight: "500" }}>{headText}</Text>
                               </View>
                             </> :
@@ -217,7 +219,7 @@ const Dashboard = ({ navigation, route }) => {
                     }
                     <View style={{backgroundColor:SWATheam.SwaWhite, borderWidth:1, borderColor: userData?.data?.colors.hoverTheme, height:145, justifyContent:'center', alignItems:'center', padding:4}}>
                     {
-                      item?.veritcalBody?.map( (verticalData, index) =>{
+                      item?.veritcalBody?.map( (verticalData, index) => {
                         return(
                           <View style={{justifyContent:'center', alignItems:'center'}} key={index}>
                             <Text style={{textTransform:'uppercase', color:userData?.data?.colors.mainTheme}}>{verticalData}</Text>
@@ -250,4 +252,15 @@ const Dashboard = ({ navigation, route }) => {
 }
 export default Dashboard
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  tableCellHead1:{
+    width:60,
+    paddingVertical:5,
+    borderWidth: 1,
+  },
+  tableCellHead2:{
+    flex:1,
+    paddingVertical:5,
+    borderWidth: 1,
+  }
+})

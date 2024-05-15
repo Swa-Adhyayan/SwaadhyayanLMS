@@ -18,6 +18,8 @@ import MultipleIntellReport from '../lmsScreen/SEPT/septReport/MultipleIntellRep
 import KnowingMeReport from '../lmsScreen/SEPT/septReport/KnowingMeReport'
 import BrainDominReport from '../lmsScreen/SEPT/septReport/BrainDominReport'
 import TimeTable from '../lmsScreen/TimeTable'
+import EditProfile from '../userScreens/EditProfile'
+import GameViewer from '../common/GameViewer'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -35,6 +37,7 @@ return (
       <Stack.Screen name = "activityView" component={ActivityView} options={{headerShown:false}}/>
       <Stack.Screen name = "videoView" component={VideoView} options={{headerShown:false}}/>
       <Stack.Screen name = "septAttempt" component={SeptAttempt} options={{headerShown:false}}/>
+      <Stack.Screen name = "gameView" component={GameViewer} options={{headerShown:false}}/>
       {/* report */}
       <Stack.Screen name = "septAcademicReport" component={AcademicReport} options={{headerShown:false}}/>
       <Stack.Screen name = "septLearningReport" component={LearningReport} options={{headerShown:false}}/>
@@ -44,6 +47,7 @@ return (
       {/* report */}
       {/* timeTable */}
       <Stack.Screen name = "timeTable" component={TimeTable} options={{headerShown:false}}/>
+      <Stack.Screen name="editProfile" component={EditProfile} options={{headerShown:false}}/>
       {/* timeTable */}
     </Stack.Navigator>
   )

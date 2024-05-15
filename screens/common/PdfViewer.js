@@ -34,9 +34,10 @@ const PdfViewer = ({navigation, route}) => {
     function onClickLeftIcon() {
         navigation.goBack()
     }
-    function onClickRightIcon() {
-        setIsInstruction(true)
-    }
+    // function onClickRightIcon() {
+    //     setIsInstruction(true)
+    // }
+
   return (
     <View style={{flex:1, marginTop:20}}>
     {/* <SwaHeader title={titleName} leftIcon={"arrowleft"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon}/> */}
@@ -49,13 +50,13 @@ const PdfViewer = ({navigation, route}) => {
                         cache: true,
                       }}
                       onLoadComplete={(numberOfPages, filePath) => {
-                        // console.log(`Number of pages: ${numberOfPages}`);
+                        console.log(`Number of pages: ${numberOfPages}`);
                       }}
                       onPageChanged={(page, numberOfPages) => {
-                        // console.log(`Current page: ${page}`);
+                        console.log(`Current page: ${page}`);
                       }}
                       onError={error => {
-                        // console.log(error);
+                        console.log(error);
                       }}
                     //   onPressLink={uri => {
                     //     console.log(`Link pressed: ${uri}`);

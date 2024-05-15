@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, SafeAreaView, Platform } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, SafeAreaView, Platform, StatusBar } from 'react-native';
 import React, { useContext, useRef, useState, useEffect } from 'react'
 import { GlobleData } from '../../Store'
 import SwaHeader from './SwaHeader'
@@ -10,8 +10,6 @@ import { SWATheam } from '../../constant/ConstentValue';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const VideoView = ({navigation, route}) => {
-
-    console.log(route, 'hari')
     let videoUrl = ''
     if(route.params.siteUrl!=undefined||route.params.siteUrl!=null){
         videoUrl = route.params.siteUrl+route.params.filePath+'/'+route.params.uploadFileName
@@ -27,6 +25,7 @@ const VideoView = ({navigation, route}) => {
   }
   
   useEffect(()=>{
+    StatusBar.setHidden(true);
     Orientation.lockToLandscape()
   },[])
 
@@ -36,11 +35,7 @@ const VideoView = ({navigation, route}) => {
     // const [fullScreen, setFullScreen] = useState(true)
     const [currentValue, setCurrentValue] = useState(0)
     const [loading, setLoading] = useState(true)
-    const [isConnected, setIsConnected] = useState(false)
-
     const ref = useRef()
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
 
     const format = seconds => {
         let minuts = parseInt(seconds / 60)
@@ -53,21 +48,11 @@ const VideoView = ({navigation, route}) => {
     function toggleModal() {
         navigation.goBack()
     }
-    async function playVideo(item){
-        const downloadPayload = {
-            "token": token,
-            "classID": item.classID,
-            "subjectID": item.subjectID,
-            "bookID": item.bookID,
-            "chapterID": item.chapterID
-        }
-        dispatch(featchVideoList(downloadPayload))
-    }
 
   return (
         <SafeAreaView style={{flex:1}}>
     <>
-                    <View style={{width: "100%", height: windowHeight-20,backgroundColor: loading ? SWATheam.SwaWhite : SWATheam.SwaBlack, borderBottomWidth: loading ? 0 : 2, marginTop:Platform.OS=='ios'?0:20}}>
+                    <View style={{width: "100%", height: '100%', backgroundColor:SWATheam.SwaBlack}}>
                     <TouchableOpacity activeOpacity={1} style={{width: "100%", height: "100%"}}
                             onPress={() => setClicked(!clicked)}>
                             <Video
@@ -84,14 +69,14 @@ const VideoView = ({navigation, route}) => {
                                 }}
                                 onBuffer={this.onBuffer}           // Callback when remote video is buffering
                                 onError={this.videoError}          // Callback when video cannot be loaded
-                                resizeMode='cover'
+                                resizeMode="contain"
                                 style={styles.videoView}/>
                             {clicked &&
                                 <TouchableOpacity style={{ width: "100%", height: "100%", position: "absolute", justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,.7)'}}
                                     onPress={() => setClicked(!clicked)}>
-                                    <TouchableOpacity style={{ position: 'absolute', top: 12, right: 12 }}
+                                    <TouchableOpacity style={{ position: 'absolute', top: 12, right: 12}}
                                         onPress={toggleModal}>
-                                        <AntDesign name="close" size={30} color={SWATheam.rSWhite} />
+                                        <AntDesign name="close" size={30} color={SWATheam.SwaWhite} />
                                     </TouchableOpacity>
                                     <View style={{ width: '70%', flexDirection: 'row', justifyContent: 'space-around' }}>
                                         <TouchableOpacity

@@ -1,4 +1,4 @@
-package com.swaadhyayanlms
+package com.swaadhyayan.lms
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

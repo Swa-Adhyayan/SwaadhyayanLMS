@@ -7,8 +7,7 @@ import { GlobleData } from '../../Store';
 import SwaHeader from '../common/SwaHeader';
 import Services from '../../Services';
 import { apiRoot } from '../../constant/ConstentValue';
-const colorSwa = '#0c8781'
-const font20 = 20
+import Loader from '../common/Loader';
 const font17 = 17
 const font15 = 15
 const ZP = 'Zero Period'
@@ -68,6 +67,7 @@ const TimeTable = ({navigation, route}) => {
     const [showSelectField2, SetShowSelectField2] = useState(false)
     const [selectClass, setSelectClass] = useState({ data: null, radioID: null })
     const [selectSection, setSelectSection] = useState({ data: null, radioID: null })
+    const [isLoading, setIsLoading] = useState(false)
     
     const [assignTeacherData, setAssignTeacherData] = useState({
         schoolCode: "SWA1854060081",
@@ -107,6 +107,7 @@ const TimeTable = ({navigation, route}) => {
     }
 
     function getTimeTableData(){
+        setIsLoading(true)
         const payload = {
             "userRefID": userData.data.userRefID,
             "schoolCode": userData.data.schoolCode,
@@ -118,10 +119,10 @@ const TimeTable = ({navigation, route}) => {
             payload["classID"]=userData.data.classID
             payload["sectionID"]=userData.data.sectionID
         }
-        console.log(payload, 'payload')
         Services.post(apiRoot.timeTable, payload)
         .then((res)=>{
             if (res.status == "success"){
+                setIsLoading(false)
                 const data = res.data.structure.structure
                 const structure = data.split(',')
                 const schoolStartTime = res.data.structure.schoolStartTime
@@ -217,7 +218,7 @@ const TimeTable = ({navigation, route}) => {
         .catch((err)=>{
             console.log(err)
         }).finally(()=>{
-
+            setIsLoading(false)
         })
 
       
@@ -415,8 +416,7 @@ const TimeTable = ({navigation, route}) => {
 
     return (
         <>
-
-            <View style={{flex: 1, marginTop: 20, backgroundColor: userData.data.colors.lightTheme}}>
+         <View style={{flex: 1, marginTop: 20, backgroundColor: userData.data.colors.lightTheme}}>
                 <SwaHeader title={route.params.iconData.iconName} leftIcon={"arrowleft"} onClickLeftIcon={onClickLeftIcon} onClickRightIcon={onClickRightIcon} />
 
                 {/* <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -444,8 +444,8 @@ const TimeTable = ({navigation, route}) => {
                         </View>
                         <View>
                             <TouchableHighlight onPress={() => getClassAndSecList('section')} underlayColor="#fff" style={{ borderRadius: 50, borderWidth: 2, borderColor: greyClr, marginBottom: 5 }}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}>
+                                <View style={{flexDirection: 'row'}}>
+                                    <View style={{flex: 1}}>
                                         {
                                             selectSection.data == null ?
                                                 <Text style={{ fontSize: font15, padding: 10 }}>Select Section</Text>:
@@ -509,6 +509,8 @@ const TimeTable = ({navigation, route}) => {
                                 </View>
                             </View>
                         </View>
+                        {isLoading?
+                        <Loader/>:
                         <View style={{ borderTopWidth: 1, borderColor: '#eaeaea', padding: 5, flex: 1 }}>
                             <ScrollView>
                                 {
@@ -535,7 +537,7 @@ const TimeTable = ({navigation, route}) => {
                                         if (name == 'PD') {
                                             pDName = ordinalNo[pDCount] + ' ' + PD
                                             pDCount++
-                                            color = colorSwa
+                                            color = userData.data.colors.mainTheme
                                             bgColor = lightPDcolor
                                             pdStartTime = timeTable.pdTime[index - 1] == undefined ? pdStartTime : timeTable.pdTime[index - 1]
                                         }
@@ -652,7 +654,7 @@ const TimeTable = ({navigation, route}) => {
                                                         <Text style={[styles.BtextClr, { fontSize: font15, fontWeight: '500', textAlign: 'center' }]}>
                                                             {timeTable.pdTime[index]} am
                                                         </Text>
-                                                        <Text style={{ textAlign: 'center', color: colorSwa, fontWeight: '500', marginTop: 5 }}>
+                                                        <Text style={{ textAlign: 'center', color: userData.data.colors.mainTheme, fontWeight: '500', marginTop: 5 }}>
                                                             {
                                                                 timeTable.pdTotalTime[index]
                                                             }
@@ -666,10 +668,10 @@ const TimeTable = ({navigation, route}) => {
                                                         userID == 2 ?
                                                             timeTable.arrTeacher[index] == 0 ? assignTeacherMsg :
                                                                 <View style={{ paddingTop: 40 }}>
-                                                                    <Text style={{ fontSize: font15, fontWeight: '500', marginBottom: 5, textAlign: 'center', color: colorSwa }}>
+                                                                    <Text style={{ fontSize: font15, fontWeight: '500', marginBottom: 5, textAlign: 'center', color: userData.data.colors.mainTheme }}>
                                                                         {timeTable.arrTeacher[index] == 0 ? blankDataImg : timeTable.arrTeacher[index]}
                                                                     </Text>
-                                                                    <Text style={{ textAlign: 'center', marginBottom: 5, color: colorSwa }}>
+                                                                    <Text style={{ textAlign: 'center', marginBottom: 5, color: userData.data.colors.mainTheme }}>
                                                                         {timeTable.arrSubject[index] == 0 ? '' : timeTable.arrSubject[index]}
                                                                     </Text>
                                                                     <View style={{ position: 'absolute', top: 0, right: 0 }}>
@@ -681,30 +683,30 @@ const TimeTable = ({navigation, route}) => {
                                                             userID == 5 ?
                                                                 timeTable.arrTeacher[index] == 0 ? blankDataImg :
                                                                     <View style={{ paddingTop: 40 }}>
-                                                                        <Text style={{ fontSize: font15, fontWeight: '500', marginBottom: 5, textAlign: 'center', color: colorSwa }}>
+                                                                        <Text style={{ fontSize: font15, fontWeight: '500', marginBottom: 5, textAlign: 'center', color: userData.data.colors.mainTheme }}>
                                                                             {timeTable.arrTeacher[index] == 0 ? blankDataImg : timeTable.arrTeacher[index]}
                                                                         </Text>
-                                                                        <Text style={{ textAlign: 'center', color: colorSwa, marginBottom: 5 }}>
+                                                                        <Text style={{ textAlign: 'center', color: userData.data.colors.mainTheme, marginBottom: 5 }}>
                                                                             {timeTable.arrSubject[index] == 0 ? '' : timeTable.arrSubject[index]}
                                                                         </Text>
                                                                     </View> :
                                                                 userID == 6 ?
                                                                     timeTable.arrTeacher[index] == 0 ? blankDataImg :
                                                                         <View style={{ paddingTop: 40 }}>
-                                                                            <Text style={{ fontSize: font15, fontWeight: '500', marginBottom: 5, textAlign: 'center', color: colorSwa }}>
+                                                                            <Text style={{ fontSize: font15, fontWeight: '500', marginBottom: 5, textAlign: 'center', color: userData.data.colors.mainTheme }}>
                                                                                 {timeTable.arrTeacher[index] == 0 ? blankDataImg : timeTable.arrTeacher[index]}
                                                                             </Text>
-                                                                            <Text style={{ textAlign: 'center', color: colorSwa, marginBottom: 5 }}>
+                                                                            <Text style={{ textAlign: 'center', color: userData.data.colors.mainTheme, marginBottom: 5 }}>
                                                                                 {timeTable.arrSubject[index] == 0 ? '' : timeTable.arrSubject[index]}
                                                                             </Text>
                                                                         </View> :
                                                                     userID == 4 ?
                                                                         timeTable.arrSubject[index] == 0 ? blankDataImg :
                                                                             <View style={{ paddingTop: 40 }}>
-                                                                                <Text style={{ fontSize: font15, fontWeight: '500', textAlign: 'center', color: colorSwa, marginBottom: 5 }}>
+                                                                                <Text style={{ fontSize: font15, fontWeight: '500', textAlign: 'center', color: userData.data.colors.mainTheme, marginBottom: 5 }}>
                                                                                     {timeTable.arrSubject[index] == 0 ? '' : timeTable.arrSubject[index]}
                                                                                 </Text>
-                                                                                <Text style={{ textAlign: 'center', color: colorSwa }}>
+                                                                                <Text style={{ textAlign: 'center', color: userData.data.colors.mainTheme }}>
                                                                                     {timeTable.arrSubject[index] == 0 ? '' : timeTable.arrSection[index]}
                                                                                 </Text>
                                                                             </View>
@@ -718,6 +720,10 @@ const TimeTable = ({navigation, route}) => {
                                 }
                             </ScrollView>
                         </View>
+                       }                                
+
+
+
                     </View>
                 }
                 {/* table */}
@@ -732,7 +738,7 @@ const TimeTable = ({navigation, route}) => {
                             <View style={{ marginVertical: 5 }}>
                                 <View style={{ borderWidth: 1, borderRadius: 5, borderColor: greyClr, marginBottom: 10 }}>
                                     <View style={{ marginBottom: 2 }}>
-                                        <Text style={[styles.WtextClr, { backgroundColor: colorSwa, padding: 7, borderTopLeftRadius: 5, borderTopRightRadius: 5, fontWeight: '500' }]}>TEACHER LIST</Text>
+                                        <Text style={[styles.WtextClr, { backgroundColor: userData.data.colors.mainTheme, padding: 7, borderTopLeftRadius: 5, borderTopRightRadius: 5, fontWeight: '500' }]}>TEACHER LIST</Text>
                                     </View>
                                     <View style={{ height: 150, paddingHorizontal: 5, paddingBottom: 5 }}>
                                         <ScrollView>
@@ -746,7 +752,7 @@ const TimeTable = ({navigation, route}) => {
                                                     let fontColor = ''
                                                     const userRefID = item.userData.userRefID
                                                     if (userRefID == selectedTeacher) {
-                                                        color = colorSwa
+                                                        color = userData.data.colors.mainTheme
                                                         fontColor = '#fff'
                                                     } else {
                                                         color = '#fff'
@@ -764,7 +770,7 @@ const TimeTable = ({navigation, route}) => {
                                 </View>
                                 <View style={{ borderWidth: 1, borderRadius: 5, borderColor: greyClr }}>
                                     <View style={{ marginBottom: 2 }}>
-                                        <Text style={[styles.WtextClr, { backgroundColor: colorSwa, padding: 7, borderTopLeftRadius: 5, borderTopRightRadius: 5, fontWeight: '500' }]}>SUBJECT LIST</Text>
+                                        <Text style={[styles.WtextClr, { backgroundColor: userData.data.colors.mainTheme, padding: 7, borderTopLeftRadius: 5, borderTopRightRadius: 5, fontWeight: '500' }]}>SUBJECT LIST</Text>
                                     </View>
                                     <View style={{ height: 150, paddingHorizontal: 5, paddingBottom: 5 }}>
                                         <ScrollView>
@@ -776,7 +782,7 @@ const TimeTable = ({navigation, route}) => {
                                                     let fontColor = ''
                                                     const subjectID = item.subjectID
                                                     if (subjectID == selectedSubject) {
-                                                        color = colorSwa
+                                                        color = userData.data.colors.mainTheme
                                                         fontColor = '#fff'
                                                     } else {
                                                         color = '#fff'
@@ -794,7 +800,7 @@ const TimeTable = ({navigation, route}) => {
                                 </View>
                             </View>
                             <View style={{ alignItems: 'flex-end', borderTopWidth: 1, borderColor: greyClr, paddingTop: 5 }}>
-                                <TouchableOpacity style={{ backgroundColor: colorSwa, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 5 }} onPress={() => { assignTeacher(), setShowAssignPop(!showAssignPop) }}>
+                                <TouchableOpacity style={{ backgroundColor: userData.data.colors.mainTheme, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 5 }} onPress={() => { assignTeacher(), setShowAssignPop(!showAssignPop) }}>
                                     <Text style={styles.WtextClr}>Assign</Text>
                                 </TouchableOpacity>
                             </View>
@@ -879,6 +885,7 @@ const TimeTable = ({navigation, route}) => {
 
             </View>
 
+
         </>
     )
 }
@@ -893,9 +900,6 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
 
-    colorSwa: {
-        backgroundColor: colorSwa,
-    },
 
     fwBold: {
         fontWeight: 500

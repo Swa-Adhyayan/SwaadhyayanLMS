@@ -18,4 +18,24 @@ buildscript {
     }
 }
 
+// for camera (hari)
+
+allprojects {
+    repositories {
+      mavenLocal()
+      jcenter()
+      maven { url "$rootDir/../node_modules/react-native/android" }
+
+      // ADD THIS
+      maven { url 'https://maven.google.com' }
+
+      // ADD THIS
+      maven { url "https://www.jitpack.io" }
+      maven {
+            url "https://artifactory.paytm.in/libs-release-local"
+        }
+    }
+}
+// for camera (hari)
+
 apply plugin: "com.facebook.react.rootproject"

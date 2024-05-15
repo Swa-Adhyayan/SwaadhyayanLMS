@@ -47,7 +47,7 @@ class Services{
     }
     async formMethod(url, body){
         return fetch(baseURL+url,{
-            headers: {accpet:"Application/json"},
+            headers: {accpet:"Application/json", "Api-token":token},
             method:"POST",
             body:body
     })
@@ -63,5 +63,8 @@ class Services{
             throw new Error(err);
     })
     }
+
+    
+
 }
 export default Services = new Services();

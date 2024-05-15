@@ -1,4 +1,4 @@
-package com.swaadhyayanlms
+package com.swaadhyayan.lms
 
 import android.app.Application
 import com.facebook.react.PackageList

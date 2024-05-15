@@ -15,13 +15,13 @@ const SwaHeader = ({title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIco
       <AntDesign name={leftIcon} size={30} color={SWATheam.SwaWhite}/>
       </TouchableOpacity>
       <View style={{flex:1, justifyContent:'center', paddingHorizontal:10}}>
-        <Text style={{fontWeight:'bold', color:SWATheam.SwaWhite, textAlign:'center'}}>{title}</Text>
+        <Text style={{fontWeight:'700', color:SWATheam.SwaWhite, textAlign:'center', fontSize:15}}>{title}</Text>
       </View>
-      <TouchableOpacity style={styles.btn}
-      onPress={()=>onClickRightIcon()}
+      <View style={styles.btn}
+      // onPress={()=>onClickRightIcon()}
       >
-      <AntDesign name={rightIcon} size={25} color={SWATheam.SwaWhite}/>
-      </TouchableOpacity>
+      {/* <AntDesign name={rightIcon} size={25} color={SWATheam.SwaWhite}/> */}
+      </View>
     </View>
   )
 }

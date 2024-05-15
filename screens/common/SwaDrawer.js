@@ -5,6 +5,7 @@ import { GlobleData } from '../../Store'
 import {Drawer} from 'react-native-paper'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+// import DefaultImg from '../assets/'
 
 const SwaDrawer = ({navigation, route}) => {
   const { userData, logOut } = useContext(GlobleData)
@@ -12,15 +13,15 @@ const SwaDrawer = ({navigation, route}) => {
     <View style={{flex:1, marginTop: 20 }}>
       <View style={{ backgroundColor: userData.data.colors.mainTheme, height: 150, justifyContent: 'flex-end', paddingBottom: 10 }}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <View style={{ height: 65, width: 65, borderRadius: 50,}}>
-            <Image source={require('../assets/SW_Logo.png')} style={{ width: '100%', height: '100%'}}/>
+          <View style={{ height: 70, width: 70, borderRadius: 50, borderWidth:2, borderColor:userData.data.colors.hoverTheme, overflow:'hidden'}}>
+            <Image source={{uri:userData.data.profilePath}} style={{ width: '100%', height: '100%', resizeMode:'contain'}}/>
           </View>
-          <View style={{justifyContent:'center', alignItems:'center', padding:10,}}>
+          <View style={{justifyContent:'center', alignItems:'center', padding:8,}}>
         <Text style={{color:SWATheam.SwaWhite, fontWeight:'500'}}>{userData.data.fullname}</Text>
       </View>
         </View>
       </View>
-      
+
       <View style={{flex:1, marginTop:10}}>
     <Drawer.Section
       showDivider={false}>

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import SwaHeader from '../common/SwaHeader'
@@ -28,6 +28,7 @@ const ActivityListScreen = ({ navigation, route }) => {
   useEffect(() => {
     const goBack = navigation.addListener('focus', () => {
         Orientation.lockToPortrait();
+        StatusBar.setHidden(false);
     });
     return goBack
 }, [navigation])

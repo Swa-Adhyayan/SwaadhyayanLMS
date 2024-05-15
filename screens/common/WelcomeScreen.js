@@ -17,7 +17,7 @@ const WelcomeScreen = ({navigation}) => {
         }, [])
   return (
     <View style={{flex:1, backgroundColor:SWATheam.SwaBlue, justifyContent:'center', alignItems:'center'}}>
-      <Image source={require('../assets/SW_Logo.png')}/>
+      <Image source={require('../assets/splash.png')} style={{height:'100%', width:'100%'}}/>
     </View>
   )
 }

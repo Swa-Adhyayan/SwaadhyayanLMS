@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import LoginScreen from '../userScreens/LoginScreen'
 import WelcomeScreen from '../common/WelcomeScreen'
 import SplashScreen from '../common/SplashScreen'
+import EditProfile from '../userScreens/EditProfile'
 
 const Stack = createStackNavigator()
 const UserScreenNavigation = () => {

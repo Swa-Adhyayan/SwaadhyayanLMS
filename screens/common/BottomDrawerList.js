@@ -10,18 +10,23 @@ const BottomDrawerList = ({ closeModule, listItem, type, getSelectedItem, select
   const {userData} = useContext(GlobleData)
 
   let ListName = ''
-  if (listItem.type == "class") {
+  if (listItem.type == "class" || listItem.type=="trmClass"){
     ListName = "Class List"
-  } else if (listItem.type == "section") {
+  }else if (listItem.type == "section"){
     ListName = "Section List"
-  } else if (listItem.type == "subject") {
+  }else if (listItem.type == "subject" || listItem.type == "gameSubject" || listItem.type == "trmSubject"){
     ListName = "Subject List"
-  } else if (listItem.type == "book") {
+  }else if (listItem.type == "book"){
     ListName = "Book List"
   }else if(listItem.type=="act"){
     ListName = listItem.listName.length>30?listItem.listName.substring(0,30) + '...':listItem.listName
+  }else if(listItem.type=='trk'){
+    ListName = "Level List"
+  }else if(listItem.type=='trksub'){
+    ListName = "Subject List"
+  }else if(listItem.type=='trmType'){
+    ListName = "TRM Type List"
   }
-
 
   return (
     <Modal
@@ -79,15 +84,15 @@ const BottomDrawerList = ({ closeModule, listItem, type, getSelectedItem, select
                   let printValue = "";
                   let listKeys = ''
                   let listItemId = ''
-                  if (listItem.type == "class") {
-                    printValue = item.getClassDetail.classDesc
+                  if (listItem.type == "class" || listItem.type=="trmClass") {
+                    printValue = item?.getClassDetail?.classDesc
                     listKeys = item.classID
                     listItemId = selectedField?.class?.classID
                   } else if (listItem.type == "section") {
                     printValue = item.sectionName
                     listKeys = item.sectionID
                     listItemId = selectedField?.section?.sectionID
-                  } else if (listItem.type == "subject") {
+                  } else if (listItem.type == "subject" || listItem.type == "gameSubject" || listItem.type == "trmSubject") {
                     printValue = item.subjectName
                     listKeys = item.subjectID
                     listItemId = selectedField?.subject?.subjectID
@@ -95,6 +100,18 @@ const BottomDrawerList = ({ closeModule, listItem, type, getSelectedItem, select
                     printValue = item.bookName
                     listKeys = item.bookID
                     listItemId = selectedField?.book?.bookID
+                  }else if(listItem.type == "trk"){
+                    printValue = item.level
+                    listKeys = item.levelID
+                    listItemId = selectedField?.level?.levelID
+                  }else if(listItem.type=="trksub"){
+                    printValue = item.subjectName
+                    listKeys = item.subjectID
+                    listItemId = selectedField?.trkSub?.subjectID
+                  }else if(listItem.type=="trmType"){
+                    printValue = item.trmType
+                    listKeys = item.trmID
+                    listItemId = selectedField?.trmType?.trmID
                   }
                   let clsName = 'radio-button-off'
                   if (listItemId == listKeys) {

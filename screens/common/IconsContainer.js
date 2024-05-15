@@ -23,18 +23,18 @@ const IconsContainer = ({deshboardData, getIconDetail, type, selectedIcon, selec
               let subIconName=""
               if(type=="mainIcon"){
                 subIconUrl = deshboardData?.iconUrl + item?.iconData?.iconPath + item?.iconData?.iconImage
-                  subIconName = item?.iconData?.iconName?.length > 12 ? item?.iconData?.iconName.substring(0, 10) + '...' : item?.iconData?.iconName
+                  subIconName = item?.iconData?.iconName?.length > 10 ? item?.iconData?.iconName.substring(0, 8) + '...' : item?.iconData?.iconName
                 arrayKey = item.mainIconID
               }else{
                 if(item.septIcon!=undefined){
                   subIconUrl = deshboardData.icons.path+item.septIcon
-                  subIconName = item.testType.length>12?item.testType.substring(0, 10) + '...': item.testType
+                  subIconName = item.testType.length>10?item.testType.substring(0, 8) + '...': item.testType
                   arrayKey = item.testID
                   activeIconBg = (selectSubIcon?.selectedSubIcon?.testType===item.testType)?userData.data.colors.hoverTheme:null
                 }else{
 
                   subIconUrl = deshboardData?.iconUrl + item?.iconData?.iconPath + item?.iconData?.iconImage
-                  subIconName = item?.iconData?.iconName?.length > 12 ? item?.iconData?.iconName.substring(0, 10) + '...' : item?.iconData?.iconName
+                  subIconName = item?.iconData?.iconName?.length > 10 ? item?.iconData?.iconName.substring(0, 8) + '...' : item?.iconData?.iconName
 
                   arrayKey = item.subIconID
 

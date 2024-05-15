@@ -58,7 +58,7 @@ if(toolItems.mainData!=undefined){
                     chapActUrl = `https://swaadhyayan.com/data/e-Learning/activities/${item.activityUrl}/Unit-${item.chapterNo}.pdf`;
                 }
                         return (
-                            <TouchableOpacity style={{ height: 160, marginVertical: 10, width: "40%", justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', elevation: 9, borderRadius: 6, justifyContent: 'space-around', padding: 8 }} key={index}
+                            <TouchableOpacity style={{ height: 180, marginVertical: 10, width: "45%", justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', elevation: 9, borderRadius: 6, justifyContent: 'space-around', padding: 8 }} key={index}
                                 onPress={() => {
                                     let actUrl = ''
                                     if((toolItems.activityUrl!=null || toolItems.activityUrl!=undefined) && item.htmlUrl == "VirtualTour"){
